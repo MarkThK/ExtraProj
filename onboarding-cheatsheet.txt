@@ -1,0 +1,57 @@
+Essential Commands
+
+git pull
+git switch [branch]
+git add [files]
+git commit -m "[message]"
+git push
+
+
+Basic workflow:
+
+Open VS Code.
+(If the correct folder is not already open, File>Open Folder and open the project’s folder)
+(If terminal not already opened on the correct folder, Terminal>New Terminal)
+(If venv does not appear activated in the terminal, run .venv\Scripts\activate.bat for Windows and source .venv/bin/activate for Linux/Mac)
+
+git pull
+git switch [name of the branch you belong in]
+Do your work on the project
+
+Once you are done:
+(If you want to inspect the changes you have made, git status)
+git add [file you have changed/created no 1].py [file you have changed/created no 2].py
+git commit -m "[message]"
+git push
+
+
+Integrating Google Colab
+
+import joblib
+from google.colab import files
+Train your model
+joblib.dump(model, "model.joblib")
+files.download("model.joblib")
+Move the .joblib file to the project’s folder
+To load it in a script:
+import joblib
+model = joblib.load("model.joblib")
+
+
+
+
+Note on exporting more than just the trained model:
+
+Alternatively, if you want to export the whole pipeline from colab, you can do:
+import joblib
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression())
+])
+
+pipeline.fit(X_train, y_train)
+joblib.dump(pipeline, "pipeline.joblib")

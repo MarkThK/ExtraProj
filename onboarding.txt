@@ -1,0 +1,48 @@
+The overall environment:
+
+We’ll use GitHub to jointly develop our Python projects. A Python installation, as well as working with Git and venv, are required. 
+Google Colab can be used to train models, but the resulting model will have to be downloaded and shared on GitHub.
+
+Git Introduction:
+
+Git allows us to all work on the same code remotely. The jointly developed code is hosted on GitHub. 
+However, we do not write the code on the GitHub website (as is don with notebooks). We write our code in our computer and use git to make sure that it is transferred to the Git Hub repository. 
+Once our code has been uploaded on GitHub, the other team members can download it and update their local copy with our contribution.
+The code for the projects is contained in a repository (or repo for short). A repository can have several branches, which contain work on different sub-topics. 
+In our case, every project will be in a different branch. The branches contain folders and files, which are copied (through git) in your computer and kept up-to-date.
+
+Git Installation:
+
+If you are on Linux or Mac, it’s worth running in a terminal git --version, in case it is preinstalled. If you get an error, it is not installed. In Windows, you need to go to the “Git for Windows” official website and download and run the installer (default options during install are okay). In (debian-based) Linux, run sudo apt install git. In Mac OS, run xcode-select --install (it installs basic command line tools, including git).
+You also need a GitHub account. Access to the repository will have to be configured, from my side (I'll need to know your username or email).
+
+Project Initialisation with Git:
+
+It’s time to create your local copy of the repository and start using git!
+Open VS Code and from the top left select File > Open Folder. Open the folder where you want your local copy of the repository to be. 
+Then go to Terminal > New Terminal and execute git clone [the URL of the github repository here]
+This will create a subfolder and put inside all the files of the repo. That subfolder, that contains your local copy, we will call “Project Folder” from now on. 
+If you want to see a different branch of the repo, you have to use git switch [branch name]. 
+You’ll see that the files listed on the left part of VS Code, are now the files of this particular branch.
+
+Virtual Environment Creation (not strictly necessary but useful):
+
+Before we start coding, it’s important to create a virtual environment (venv). It stores the python versions and the python modules that you use for the project.
+To create it, open the Project Folder on VS Code and open a terminal. Then run the command “python -m venv .venv”, which creates a virtual environment for your project. 
+To get into your virtual environment, you need to activate it. You do this by running “source .venv/bin/activate” on Linux/Mac or “.venv\Scripts\activate.bat” if you are on Windows. You’ll see in the terminal that a “(venv)” indication has appeared to the left of the path.
+
+Using Git in Practice:
+
+Let's say that you want to work on your project.
+You open VS Code. It is probably already open on the Project Folder, but if not, you go to File>Open Folder and you select the Project Folder. You also open a terminal, if it’s not already open on the correct folder. 
+Before you start coding, you need to make sure that you have the latest version of the repository on your computer. You do this by running git pull. This command updates your local repo with any changes your colleagues may have made while you were away.
+Then you have to go to the branch of your project. This is the right place to save the scripts that you’ll create. You do this by running git switch [name of the branch that has your project]. You can now see on the left the files of this branch. 
+You are now ready to go! You create a new file, write your code inside it and save it as [file name].py. You run it with python [filename].py on the terminal.
+When you are done, it is time to put your work in the repo, for your teammates to see. 
+You do this by first adding it to the changes to be made with git add [script name].py; then git commit -m "[put a short message about the changes here]"; and finally git push.
+
+Integrating Google Colab:
+
+What if I want to train models with google colab resources, instead of my own?
+You need to save the trained model inside google colab, with joblib.dump([model name], "[model name].joblib"). You need to have imported joblib for this to work.
+Then you download it with from google.colab import files and files.download("[model_name].joblib"). You move it from the downloads to your project folder and use it in a local script with model = joblib.load("[model name].joblib").
